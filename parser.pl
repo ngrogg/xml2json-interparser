@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+use feature qw(switch);
 use warnings;
 use strict;
 use JSON;
@@ -10,7 +11,7 @@ use XML::Simple;
 
 # Help
 sub helpFunction {
-    print "Help";
+    print "Help\n";
 	print "----------------------------------------------------\n";
 
     ## TODO: Help output
@@ -18,7 +19,7 @@ sub helpFunction {
 
 # XML to JSON function
 sub xmlToJson {
-    print "XML -> JSON";
+    print "XML -> JSON\n";
 	print "----------------------------------------------------\n";
 
     ## Read passed values
@@ -32,7 +33,7 @@ sub xmlToJson {
 
 # JSON to XML function
 sub jsonToXml {
-    print "JSON -> XML";
+    print "JSON -> XML\n";
 	print "----------------------------------------------------\n";
 
     ## Read passed values
@@ -52,25 +53,25 @@ sub runProgram {
     my ($option,$file1,$file2) = @ARGV;
 
     ## Take action depending on passed arguments
-    switch($option) {
+    given ($option) {
         ### If $option == 'help' run help function and exit
-        case "help" {
+        when ("help") {
                 helpFunction();
                 exit 0;
         }
         ### If input XML and output JSON, run XML -> JSON function
-        case "xml" {
+        when ("xml") {
                 xmlToJson($option,$file1,$file2);
                 exit 0;
         }
         ### If input JSON and output JSON, run JSON to XML function
-        case "json" {
+        when ("json") {
                 jsonToXml($option,$file1,$file2);
                 exit 0;
         }
         ### Else invalid options passed, run help function and exit
-        else {
-                print "Invalid option passed, running help function and exiting!";
+        default {
+                print "Invalid option passed, running help function and exiting!\n";
                 helpFunction();
                 exit 1;
         }
