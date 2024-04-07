@@ -15,8 +15,8 @@ Packages can be installed with the cpan command: <br>
 `cpan install Switch` <br>
 
 ## Usage
-Takes an input file, format, output file, format and output filepath as arguments. <br>
-Usage, `./parser.pl inFile format outFile format /path/to/outfile` <br>
-Ex. `./parser.pl inFile.xml xml outFile.json json ~/` <br>
+Takes an input file, it's format, and output file as arguments. <br>
+Usage, `./parser.pl format inFile outFile /path/to/outputFolder` <br>
+Ex. `./parser.pl xml inFile.xml outFile.json ~/` <br>
 Parsed files are saved by default to the output folder. <br>
 Passing an output filepath overrides this setting. <br>

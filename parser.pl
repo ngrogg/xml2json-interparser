@@ -23,9 +23,12 @@ sub xmlToJson {
 	print "----------------------------------------------------\n";
 
     ## Read passed values
-    my ($command,$inputFile,$outputFile) = @_;
+    my ($command,$inputFile,$outputFile,$outputFilePath) = @_;
 
     ## TODO: Validation
+    ### Is outputFilePath null? If null use default, else use provided filepath
+    ### Is inputFile null?
+    ### Is outputFile null?
 
     ## TODO: Parse XML to JSON
 
@@ -37,9 +40,12 @@ sub jsonToXml {
 	print "----------------------------------------------------\n";
 
     ## Read passed values
-    my ($command,$inputFile,$outputFile) = @_;
+    my ($command,$inputFile,$outputFile,$outputFilePath) = @_;
 
     ## TODO: Validation
+    ### Is outputFilePath null? If null use default, else use provided filepath
+    ### Is inputFile null?
+    ### Is outputFile null?
 
     ## TODO: Parse JSON to XML
 }
@@ -50,8 +56,9 @@ sub runProgram {
 	print "----------------------------------------------------\n";
 
     ## Parse passed arguments
-    my ($option,$file1,$file2) = @ARGV;
+    my ($option,$file1,$file2,$outFilePath) = @ARGV;
 
+    #TODO: Remove given/when statements
     ## Take action depending on passed arguments
     #given ($option) {
     switch($option) {
@@ -64,13 +71,13 @@ sub runProgram {
         ### If input XML and output JSON, run XML -> JSON function
         #when ("xml") {
         case "xml" {
-                xmlToJson($option,$file1,$file2);
+                xmlToJson($option,$file1,$file2,$outFilePath);
                 exit 0;
         }
         ### If input JSON and output JSON, run JSON to XML function
         #when ("json") {
         case "json" {
-                jsonToXml($option,$file1,$file2);
+                jsonToXml($option,$file1,$file2,$outFilePath);
                 exit 0;
         }
         ### Else invalid options passed, run help function and exit
