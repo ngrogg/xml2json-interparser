@@ -11,17 +11,18 @@ use XML::LibXML;
 # xml2json-interparser
 # Move XML and JSON files between formatting
 # By Nicholas Grogg
+# TODO: Clean up commented out code
 
 # Help
 sub helpFunction {
     print "Help\n";
 	print "----------------------------------------------------\n";
-    print "XML 2 JSON Interparser";
-    print "Move XML and JSON files between formats";
-    print "Takes a format to convert to, an input file, output file and destination path as arguments";
-    print "If no output path is provided default ~/";
-    print "Usage. ./parser.pl format inFile outFile /path/to/outputFolder";
-    print "Ex. ./parserl.pl xml input.xml output.json /home/jsmith/Documents";
+    print "XML 2 JSON Interparser\n";
+    print "Move XML and JSON files between formats\n";
+    print "Takes a format to convert to, an input file, output file and destination path as arguments\n";
+    print "If no output path is provided default ~/\n";
+    print "Usage. ./parser.pl format inFile outFile /path/to/outputFolder\n";
+    print "Ex. ./parserl.pl xml input.xml output.json /home/jsmith/Documents\n";
 }
 
 # XML File Validator, checks that provided XML files is valid
@@ -80,12 +81,57 @@ sub xmlToJson {
     #my ($command,$inputFile,$outputFile,$outputFilePath) = @_;
     my ($command,$inputFile,$outputFile,$outputFilePath) = @_;
 
-    #TODO: Validation
-    ### Is outputFilePath null? If null use default, else use provided filepath
+    ## Validation
     ### Is inputFile null?
+    if (not defined $inputFile){
+        print "ISSUE DETECTED: An input filename was not found!\n";
+	    print "----------------------------------------------------\n";
+        print "Re-run script with valid values. \n";
+        exit 1;
+    }
+    else {
+        print "Input filename was defined\n";
+	    print "----------------------------------------------------\n";
+        print "Proceeding\n";
+    }
+
     ### Is outputFile null?
+    if (not defined $outputFile){
+        print "ISSUE DETECTED: An output filename was not found!\n";
+	    print "----------------------------------------------------\n";
+        print "Re-run script with valid values. \n";
+        exit 1;
+    }
+    else {
+        print "Output Filename was defined\n";
+	    print "----------------------------------------------------\n";
+        print "Proceeding\n";
+    }
+
+    ### Is outputFilePath null? If null use default, else use provided filepath
+    if (not defined $outputFilePath){
+        print "IMPORTANT: Filepath for output file undefined!\n";
+	    print "----------------------------------------------------\n";
+        print "Defaulting to ~/\n";
+        print "Press enter to proceed or control-c to quit\n";
+        my $junkInput = <>;
+    }
+    else {
+        print "Output Filepath was defined\n";
+	    print "----------------------------------------------------\n";
+        print "Proceeding\n";
+    }
+
     ### Is provided XML file valid?
-    xmlValidation($outputFile);
+    if (xmlValidation($outputFile)){
+            print "XML input file valid, continuing.\n";
+    }
+    else {
+            print "ISSUE DETECTED: XML input file failed to validate!\n";
+	        print "----------------------------------------------------\n";
+            print "Verify XML file and re-run script!\n";
+            exit 1;
+    }
 
     #TODO: Parse XML to JSON
 
@@ -101,12 +147,58 @@ sub jsonToXml {
     #my ($command,$inputFile,$outputFile,$outputFilePath) = @_;
     my ($inputFile,$outputFile,$outputFilePath) = @_;
 
-    #TODO: Validation
-    ### Is outputFilePath null? If null use default, else use provided filepath
+    ## Validation
     ### Is inputFile null?
+    if (not defined $inputFile){
+        print "ISSUE DETECTED: An input filename was not found!\n";
+	    print "----------------------------------------------------\n";
+        print "Re-run script with valid values. \n";
+        exit 1;
+    }
+    else {
+        print "Input filename was defined\n";
+	    print "----------------------------------------------------\n";
+        print "Proceeding\n";
+    }
+
     ### Is outputFile null?
-    ### Is provided JSON files valid?
-    jsonValidation($inputFile);
+    if (not defined $outputFile){
+        print "ISSUE DETECTED: An output filename was not found!\n";
+	    print "----------------------------------------------------\n";
+        print "Re-run script with valid values. \n";
+        exit 1;
+    }
+    else {
+        print "Output Filename was defined\n";
+	    print "----------------------------------------------------\n";
+        print "Proceeding\n";
+    }
+
+    ### Is outputFilePath null? If null use default, else use provided filepath
+    if (not defined $outputFilePath){
+        print "IMPORTANT: Filepath for output file undefined!\n";
+	    print "----------------------------------------------------\n";
+        print "Defaulting to ~/\n";
+        print "Press enter to proceed or control-c to quit\n";
+        my $junkInput = <>;
+    }
+    else {
+        print "Output Filepath was defined\n";
+	    print "----------------------------------------------------\n";
+        print "Proceeding\n";
+    }
+
+
+    ### Is provided JSON file valid?
+    if (jsonValidation($inputFile)){
+            print "JSON input file valid, continuing.\n";
+    }
+    else {
+            print "ISSUE DETECTED: JSON input file failed to validate!\n";
+	        print "----------------------------------------------------\n";
+            print "Verify JSON file and re-run script!\n";
+            exit 1;
+    }
 
     #TODO: Parse JSON to XML
 }
