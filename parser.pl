@@ -114,7 +114,7 @@ sub xmlToJson {
 	    print "----------------------------------------------------\n";
         print "Defaulting to ~/\n";
         print "Press enter to proceed or control-c to quit\n";
-        my $junkInput = <>;
+        my $junkInput = <STDIN>;
     }
     else {
         print "Output Filepath was defined\n";
@@ -180,7 +180,7 @@ sub jsonToXml {
 	    print "----------------------------------------------------\n";
         print "Defaulting to ~/\n";
         print "Press enter to proceed or control-c to quit\n";
-        my $junkInput = <>;
+        my $junkInput = <STDIN>;
     }
     else {
         print "Output Filepath was defined\n";
