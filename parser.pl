@@ -137,7 +137,7 @@ sub runProgram {
                 xmlToJson($file1,$file2,$outFilePath);
                 exit 0;
         }
-        ### If input JSON and output JSON, run JSON to XML function
+        ### If input JSON and output XML, run JSON to XML function
         #when ("json") {
         case "json" {
                 #TODO: Do I need $option?
