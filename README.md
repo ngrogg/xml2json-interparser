@@ -23,3 +23,5 @@ Ex. `./parser.pl xml inFile.xml outFile.json ~/Documents` <br>
 Parsed files are saved by default to ~/. <br>
 Passing an output filepath overrides this setting. <br>
 Has checks for files and file validation. <br>
+<br>
+There are sample JSON and XML files located in the sampleInput folder.
