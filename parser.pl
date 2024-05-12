@@ -1,10 +1,10 @@
 #!/usr/bin/perl
-use Switch;
-#use feature qw(switch);
 use warnings;
 use strict;
 use JSON;
 use JSON::Validator;
+use Switch;
+#use feature qw(switch);
 use XML::Simple;
 use XML::LibXML;
 
