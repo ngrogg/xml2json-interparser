@@ -133,7 +133,26 @@ sub xmlToJson {
             exit 1;
     }
 
-    ### Parse XML to JSON
+    ## Parse XML to JSON
+    ### Create XML items
+    my $xmlInput   = $inputFile;
+    my $jsonOutput = $outputFile
+
+    ### Read in XML files
+    open my $xmlRead, '<', $xmlInput or die "Unable to open $inputFile: $!";
+    my $xmlText    = do { local $/; <$xmlRead> };
+    close $xmlRead;
+
+    ### Convert XML Data to Perl data structure
+    my $xmlData    = XMLin($xmlText);
+
+    ### Convert Perl data structure to JSON data
+    my jsonText    = to_json($xmlData, { pretty => 1});
+
+    ### Write JSON data to file
+    open my $jsonWrite, '>', $jsonOutput or die "Unable to open $jsonOutput: $!";
+    print $jsonWrite $jsonText;
+    close $jsonWrite;
 
 }
 
@@ -202,19 +221,19 @@ sub jsonToXml {
 
     ## Parse JSON to XML
     ### Create JSON items
-    my $jsonInput    = $inputFile;
-    my $xmlOutput    = $outputFile;
+    my $jsonInput = $inputFile;
+    my $xmlOutput = $outputFile;
 
     ### Read in JSON files
     open my $jsonRead, '<', $jsonInput or die "Unable to open $jsonInput: $!";
-    my $jsonData     = do { local $/; <$jsonRead> };
+    my $jsonData  = do { local $/; <$jsonRead> };
     close $jsonRead;
 
     ### Convert JSON data to Perl data structure
-    my $perlData     = decode_json($jsonData);
+    my $perlData  = decode_json($jsonData);
 
     ### Convert Perl data structure to XML
-    my $xmlData      = XMLout($perlData, Rootname => 'root', XMLDecl => 1);
+    my $xmlData   = XMLout($perlData, Rootname => 'root', XMLDecl => 1);
 
     ### Write XML to file
     open my $xmlWrite, '>', $xmlOutput or die "Unable to open $xmlOutput: $!";
