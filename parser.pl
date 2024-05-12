@@ -1,6 +1,5 @@
 #!/usr/bin/perl
 use Switch;
-#use feature qw(switch);
 use warnings;
 use strict;
 use JSON;
@@ -11,7 +10,6 @@ use XML::LibXML;
 # xml2json-interparser
 # Move XML and JSON files between formatting
 # By Nicholas Grogg
-# TODO: Clean up commented out code
 
 # Help
 sub helpFunction {
@@ -77,8 +75,6 @@ sub xmlToJson {
 	print "----------------------------------------------------\n";
 
     ## Read passed values
-    #TODO: is $command needed?
-    #my ($command,$inputFile,$outputFile,$outputFilePath) = @_;
     my ($inputFile,$outputFile,$outputFilePath) = @_;
 
     ## Validation
@@ -162,8 +158,6 @@ sub jsonToXml {
 	print "----------------------------------------------------\n";
 
     ## Read passed values
-    #TODO: Is $command needed?
-    #my ($command,$inputFile,$outputFile,$outputFilePath) = @_;
     my ($inputFile,$outputFile,$outputFilePath) = @_;
 
     ## Validation
@@ -250,29 +244,17 @@ sub runProgram {
     ## Parse passed arguments
     my ($option,$file1,$file2,$outFilePath) = @ARGV;
 
-    #TODO: Remove given/when statements
     ## Take action depending on passed arguments
-    #given ($option) {
     switch($option) {
-        ### If $option == 'help' run help function and exit
-        #when ("help") {
         case "help" {
                 helpFunction();
                 exit 0;
         }
-        ### If input XML and output JSON, run XML -> JSON function
-        #when ("xml") {
         case "xml" {
-                #TODO: Do I need $option?
-                #xmlToJson($option,$file1,$file2,$outFilePath);
                 xmlToJson($file1,$file2,$outFilePath);
                 exit 0;
         }
-        ### If input JSON and output XML, run JSON to XML function
-        #when ("json") {
         case "json" {
-                #TODO: Do I need $option?
-                #jsonToXml($option,$file1,$file2,$outFilePath);
                 jsonToXml($file1,$file2,$outFilePath);
                 exit 0;
         }
