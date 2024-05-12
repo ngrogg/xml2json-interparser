@@ -79,7 +79,7 @@ sub xmlToJson {
     ## Read passed values
     #TODO: is $command needed?
     #my ($command,$inputFile,$outputFile,$outputFilePath) = @_;
-    my ($command,$inputFile,$outputFile,$outputFilePath) = @_;
+    my ($inputFile,$outputFile,$outputFilePath) = @_;
 
     ## Validation
     ### Is inputFile null?
@@ -133,7 +133,7 @@ sub xmlToJson {
             exit 1;
     }
 
-    #TODO: Parse XML to JSON
+    ### Parse XML to JSON
 
 }
 
@@ -200,7 +200,27 @@ sub jsonToXml {
             exit 1;
     }
 
-    #TODO: Parse JSON to XML
+    ## Parse JSON to XML
+    ### Create JSON items
+    my $jsonInput    = $inputFile;
+    my $xmlOutput    = $outputFile;
+
+    ### Read in JSON files
+    open my $jsonRead, '<', $jsonInput or die "Unable to open $jsonInput: $!";
+    my $jsonData     = do { local $/; <$jsonRead> };
+    close $jsonRead;
+
+    ### Convert JSON data to Perl data structure
+    my $perlData     = decode_json($jsonData);
+
+    ### Convert Perl data structure to XML
+    my $xmlData      = XMLout($perlData, Rootname => 'root', XMLDecl => 1);
+
+    ### Write XML to file
+    open my $xmlWrite, '>', $xmlOutput or die "Unable to open $xmlOutput: $!";
+    print $xmlWrite $xmlData;
+    close $xmlWrite;
+
 }
 
 # Function to run program
