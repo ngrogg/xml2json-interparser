@@ -1,9 +1,10 @@
 #!/usr/bin/perl
-use Switch;
 use warnings;
 use strict;
 use JSON;
 use JSON::Validator;
+use Switch;
+#use feature qw(switch);
 use XML::Simple;
 use XML::LibXML;
 
@@ -132,7 +133,7 @@ sub xmlToJson {
     ## Parse XML to JSON
     ### Create XML items
     my $xmlInput   = $inputFile;
-    my $jsonOutput = $outputFile
+    my $jsonOutput = $outputFile;
 
     ### Read in XML files
     open my $xmlRead, '<', $xmlInput or die "Unable to open $inputFile: $!";
@@ -143,7 +144,7 @@ sub xmlToJson {
     my $xmlData    = XMLin($xmlText);
 
     ### Convert Perl data structure to JSON data
-    my jsonText    = to_json($xmlData, { pretty => 1});
+    my $jsonText    = to_json($xmlData, { pretty => 1});
 
     ### Write JSON data to file
     open my $jsonWrite, '>', $jsonOutput or die "Unable to open $jsonOutput: $!";
@@ -246,20 +247,22 @@ sub runProgram {
 
     ## Take action depending on passed arguments
     switch($option) {
+        ### If $option == 'help' run help function and exit
         case "help" {
                 helpFunction();
                 exit 0;
         }
+        ### If input XML and output JSON, run XML -> JSON function
         case "xml" {
                 xmlToJson($file1,$file2,$outFilePath);
                 exit 0;
         }
+        ### If input JSON and output XML, run JSON to XML function
         case "json" {
                 jsonToXml($file1,$file2,$outFilePath);
                 exit 0;
         }
         ### Else invalid options passed, run help function and exit
-        #default {
         else {
                 print "Invalid option passed, running help function and exiting!\n";
                 helpFunction();
