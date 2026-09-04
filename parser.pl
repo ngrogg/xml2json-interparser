@@ -120,7 +120,7 @@ sub xmlToJson {
     }
 
     ### Is provided XML file valid?
-    if (xmlValidation($outputFile)){
+    if (xmlValidation($inputFile)){
             print "XML input file valid, continuing.\n";
     }
     else {
