@@ -6,17 +6,8 @@ An in-progress Perl script for moving XML files to the JSON format or vice-versa
 ### Requirements
 Parser script requires the following modules: <br>
 * JSON
-* JSON::Validator
 * XML::Simple
 * XML:LibXML
-* Switch
-
-Packages can be installed with the cpan command: <br>
-`cpan install JSON` <br>
-`cpan install JSON::Validator` <br>
-`cpan install Switch` <br>
-`cpan install XML:LibXML` <br>
-`cpan install XML::Simple` <br>
 
 ## Usage
 Takes an input file, it's format, and output file as arguments. <br>

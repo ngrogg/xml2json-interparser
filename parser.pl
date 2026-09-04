@@ -40,6 +40,26 @@ sub helpFunction {
     print " ./parser.pl xml input.xml output.json /home/jsmith/Documents\n";
     print " ./parser.pl json input.json output.xml\n";
 }
+# Convert JSON boolean objects to Perl scalar values
+sub normalizeJsonBooleans {
+    my ($data) = @_;
+
+    if (ref $data eq 'HASH') {
+        for my $key (keys %{$data}) {
+            $data->{$key} = normalizeJsonBooleans($data->{$key});
+        }
+    }
+    elsif (ref $data eq 'ARRAY') {
+        for my $index (0 .. $#{$data}) {
+            $data->[$index] = normalizeJsonBooleans($data->[$index]);
+        }
+    }
+    elsif (ref $data eq 'JSON::PP::Boolean') {
+        return $data ? 1 : 0;
+    }
+
+    return $data;
+}
 
 # Validate common arguments
 sub validateArguments {
@@ -200,6 +220,9 @@ sub jsonToXml {
     if ($@) {
         die "ISSUE DETECTED: JSON input file failed to validate!\n";
     }
+
+    # Convert JSON boolean objects to Perl scalar values
+    $perlData = normalizeJsonBooleans($perlData);
 
     ## Convert Perl data structure to XML
     my $xmlData = XMLout(

@@ -1,0 +1,27 @@
+{
+    "catalog": {
+        "product": [
+            {
+                "id": "1001",
+                "name": "Linux Administration Guide",
+                "category": "Books",
+                "price": 39.99,
+                "inStock": true
+            },
+            {
+                "id": "1002",
+                "name": "Mechanical Keyboard",
+                "category": "Hardware",
+                "price": 89.99,
+                "inStock": true
+            },
+            {
+                "id": "1003",
+                "name": "USB-C Hub",
+                "category": "Hardware",
+                "price": 29.99,
+                "inStock": false
+            }
+        ]
+    }
+}

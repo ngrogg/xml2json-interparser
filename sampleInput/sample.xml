@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog>
+    <product id="1001">
+        <name>Linux Administration Guide</name>
+        <category>Books</category>
+        <price>39.99</price>
+        <inStock>true</inStock>
+    </product>
+    <product id="1002">
+        <name>Mechanical Keyboard</name>
+        <category>Hardware</category>
+        <price>89.99</price>
+        <inStock>true</inStock>
+    </product>
+    <product id="1003">
+        <name>USB-C Hub</name>
+        <category>Hardware</category>
+        <price>29.99</price>
+        <inStock>false</inStock>
+    </product>
+</catalog>
